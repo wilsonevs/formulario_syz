@@ -13,6 +13,6 @@ module.exports = (app) => {
     app.get("/", getIndex);
     app.post("/", postIndex);
 
-    app.get("/w", getW);
+    app.get("/prueba", getW);
 
 }

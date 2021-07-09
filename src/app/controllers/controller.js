@@ -1,7 +1,7 @@
 const pool = require("../../config/connectionDb");
 
 const getIndex = (req, res) => {
-    res.render("formulario.ejs");
+    res.render("index.ejs");
 }
 
 
@@ -39,7 +39,7 @@ const postIndex = async (req, res) => {
 const getW = async (req, res) =>{
   try {
     const querys= "SELECT * FROM nombres";
-    pool.query(querys, (error, results) =>{
+    pool.query(querys, results =>{
       res.render("prueba.ejs", {
         datos: results,
       })

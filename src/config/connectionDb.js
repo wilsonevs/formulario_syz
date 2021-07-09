@@ -1,20 +1,16 @@
-const {Client} = require('pg');
-
-//funciona porque el servidor esta conectado con anterioridad a dotenv que esta configurado
-//y ligado a la carpeta ./env/.env
-
+const {Pool, Client} = require('pg');
 
 const connectionData  = {
     host: process.env.DB_HOST,
-    pass: process.env.DB_PASSWORD,
     user: process.env.DB_USER,
     database: process.env.DB_DATABASE,
+    password: process.env.DB_PASSWORD,
     port: process.env.DB_PORT,
 };
 
-console.log("Conectado exitosamente a BD");
+    const pool = new  Pool(connectionData);
+    pool.connect;
+    // pool.connect();
+    console.log("Conexión a base de datos exitosamente.");
 
-const client = new  Client(connectionData);
-
-//probar el modulo:
-module.exports = client ;
+module.exports = pool;

@@ -1,4 +1,4 @@
-const app = require("./config/server");
+const app = require("./config/app");
 
 const rutas= require('./app/routers/router.js');
 rutas(app);

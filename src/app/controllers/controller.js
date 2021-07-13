@@ -1,3 +1,4 @@
+const {validationResult } = require ("express-validator");
 const pool = require("../../config/connectionDb");
 
 const getIndex = (req, res) => {
@@ -5,7 +6,7 @@ const getIndex = (req, res) => {
 }
 
 
-const postIndex = async (req, res) => {
+const index_Post = async (req, res) => {
   const { firstname, lastname, telefono, celular, email, empresa, observacion } = req.body;
   const datos="INSERT INTO contactanos (firstname, lastname, telefono, celular, email, empresa, observacion) VALUES ($1, $2, $3, $4, $5, $6, $7)";
   const values= [firstname, lastname, telefono, celular, email, empresa, observacion ];
@@ -35,7 +36,6 @@ const postIndex = async (req, res) => {
   }
 };
 
-
 const getW = async (req, res) =>{
   try {
     const querys= "SELECT * FROM nombres";
@@ -54,10 +54,50 @@ const getW = async (req, res) =>{
 }
 
 
+const index_Validacion_post = (req, res) => {
+  // const errors = validationResult(req);
+  // if (!errors.isEmpty()) {
+  //   res.status(400).json({ errors: errors.array() });
+  //   console.log(errors)
+  // };
+
+   const errors = validationResult(req);
+   if(!errors.isEmpty()){
+     console.log(req.body);
+     const valores = req.body;
+     const validacionesErrores = errors.array();
+     res.render("index.ejs", {
+      validacionesErrores: validacionesErrores,
+      valores: valores,
+       alertPosition: 'bottom',
+       alertTitle: validacionesErrores,
+       alertIcon: "warning",
+       showConfirmButton: true,
+       timer: 2500,
+       ruta: "/",
+      });
+   }else{
+    res.render("index.ejs", {
+      alert: true,
+      alertPosition: 'center',
+      alertIcon: "success",
+      alertTitle: "Enviado",
+      showConfirmButton: false,
+      timer: false,
+      ruta: "/",
+    });
+   }
+  
+};
+
+
+
+
 
 
 module.exports = {
   getIndex, 
-  postIndex, 
+  index_Post, 
+  index_Validacion_post,
   getW,
 }

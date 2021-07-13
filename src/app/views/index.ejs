@@ -16,35 +16,41 @@
             <!-- Inicio Login -->
             <form action="/" method="POST">
                 <div class=" mb-3">
-                    <label for="firstname" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Ingresar Nombre" autofocus required>
+                    <label for="firstname1" class="form-label">Nombre</label>
+                    <input id="firstname1" name="firstname" type="text" class="form-control" placeholder="Ingresar Nombre" autofocus
+                    value="<% (typeof valores != 'undefined') ? valores.firstname : valores.firstname %> ">
                 </div>
                 <div class=" mb-3">
-                    <label for="lastname" class="form-label">Apellido</label>
-                    <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Ingresar Apellido" required>
+                    <label for="lastname1" class="form-label">Apellido</label>
+                    <input id="lastname1" name="lastname" type="text" class="form-control" placeholder="Ingresar Apellido"
+                    value="<% (typeof valores != 'undefined') ? valores.lastname : '' %> ">
                 </div>
                 <div class=" mb-3">
-                    <label for="telefono" class="form-label">Teléfono</label>
-                    <input type="tel" class="form-control" id="telefono" name="telefono" placeholder="Ingresar Teléfono" required>
+                    <label for="telefono1" class="form-label">Teléfono</label>
+                    <input  id="telefono1" name="telefono" type="text" class="form-control" placeholder="Ingresar Teléfono"
+                    value="<% (typeof valores != 'undefined') ? valores.telefono : '' %> ">
                 </div>
                 <div class=" mb-3">
-                    <label for="celular" class="form-label">Celular</label>
-                    <input type="tel" class="form-control" id="celular" name="celular" placeholder="Ingresar Celular" required>
+                    <label for="celular1" class="form-label">Celular</label>
+                    <input id="celular1" name="celular" type="text" class="form-control" placeholder="Ingresar Celular"
+                    value="<% (typeof valores != 'undefined') ? valores.celular : '' %> ">
                 </div>
                 <div class=" mb-3">
-                    <label for="email" class="form-label">Correo</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Ingresar Correo" required>
+                    <label for="email1" class="form-label">Correo</label>
+                    <input id="email1" name="email" type="text" class="form-control" placeholder="Ingresar Correo"
+                    value="<% (typeof valores != 'undefined') ? valores.email : '' %> ">
                 </div>
                 <div class=" mb-3">
-                    <label for="empresa" class="form-label">Empresa</label>
-                    <input type="text" class="form-control" id="empresa" name="empresa" placeholder="Ingresar Empresa" required>
+                    <label for="empresa1" class="form-label">Empresa</label>
+                    <input id="empresa1" name="empresa" type="text" class="form-control" placeholder="Ingresar Empresa"
+                    value="<% (typeof valores != 'undefined') ? valores.empresa : '' %> ">
                 </div>
                 <div class="mb-3">
-                    <label for="observacion" class="form-label">Observación</label>
-                    <textarea class="form-control" id="observacion" name="observacion" for="observacion" placeholder="Una breve descripción..." minlength="3" maxlength="550" required></textarea>
+                    <label for="observacion1" class="form-label">Observación</label>
+                    <textarea id="observacion1" name="observacion" class="form-control" placeholder="Una breve descripción, 550 palabras..."></textarea>
                 </div>
                 <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-label" required>
+                    <input type="checkbox" class="form-check-label">
                     <label for="validacion" class="form-check-label"> He leído y acepto la <a href="#">Política de Tratamiento </a> de Datos</label>
                 </div>
                 <div class="d-grid">
@@ -97,18 +103,39 @@
 
 <!-- Iniciar alerta -->
 
-<% if(typeof alert !="undefined") { %>
+<
+
+<% if(typeof alert != "undefined") { %>
     <script>
         Swal.fire({
+            position: '<%= alertPosition %>',
             title: '<%= alertTitle  %>',
-            text: '<%= alertMessage %>',
             icon: '<%= alertIcon %>',
+            text: '<%= alertText %>',
             showConfirmButton:'<%= showConfirmButton %>',
             timer:  '<%= timer %>',
+            
         }).then(()=>{
             window.location= '/<%= ruta %>'
         })
     </script>
 <% } %>
+
+<% if(typeof validacionesErrores != "undefined") { %>
+    <% validacionesErrores.forEach( (validacionesErrores) => { %> 
+        <script>
+            Swal.fire({
+                position: '<%= alertPosition %>',
+                icon: '<%= alertIcon %>',
+                title: '<%= validacionesErrores.msg %>',
+                showConfirmButton:'<%= showConfirmButton %>',
+                timer:  '<%= timer %>',
+           }).then(()=>{
+               window.location= '/<%= ruta %>'
+           })
+       </script>
+
+    <% }) %> 
+<% } %> 
     
 <!-- Fin alerta -->

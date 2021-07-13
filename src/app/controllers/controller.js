@@ -64,17 +64,17 @@ const index_Validacion_post = (req, res) => {
    const errors = validationResult(req);
    if(!errors.isEmpty()){
      console.log(req.body);
-     const valores = req.body;
      const validacionesErrores = errors.array();
+     const valores = req.body;
      res.render("index.ejs", {
       validacionesErrores: validacionesErrores,
       valores: valores,
-       alertPosition: 'bottom',
-       alertTitle: validacionesErrores,
-       alertIcon: "warning",
-       showConfirmButton: true,
-       timer: 2500,
-       ruta: "/",
+      alertPosition: 'bottom',
+      alertTitle: validacionesErrores,
+      alertIcon: "warning",
+      showConfirmButton: true,
+      timer: 2500,
+      ruta: "/",
       });
    }else{
     res.render("index.ejs", {

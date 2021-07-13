@@ -4,10 +4,9 @@
   "description": "formulario con validaciones para SYZ.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "sass": "sass --output-style compressed -o src/public/scss/style.sass src/public/css/style.css",
-    "start:node": "node src/index.js",
-    "start": "nodemon src/index"
+    "start": "node src/index.js",
+    "dev": "nodemon src/index"
   },
   "keywords": [],
   "author": "Wilson Valencia",

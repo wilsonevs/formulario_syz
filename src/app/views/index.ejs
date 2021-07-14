@@ -18,36 +18,37 @@
                 <div class=" mb-3">
                     <label for="firstname1" class="form-label">Nombre</label>
                     <input id="firstname1" name="firstname" type="text" class="form-control" placeholder="Ingresar Nombre" 
-                    value= "<% if (typeof valores != 'undefined') { %><%=  valores.firstname %><% } %>%> " autofocus>
+                    value= "<% if (typeof valores != 'undefined') { %><%= valores.firstname %><% } %>" autofocus>
                 </div>
                 <div class=" mb-3">
                     <label for="lastname1" class="form-label">Apellido</label>
                     <input id="lastname1" name="lastname" type="text" class="form-control" placeholder="Ingresar Apellido"
-                    value= "<% if (typeof valores != 'undefined') { %><%= valores.lastname %><% } %>%> ">
+                    value= "<% if (typeof valores != 'undefined') { %><%= valores.lastname %><% } %>">
                 </div>
                 <div class=" mb-3">
                     <label for="telefono1" class="form-label">Teléfono</label>
                     <input  id="telefono1" name="telefono" type="text" class="form-control" placeholder="Ingresar Teléfono"
-                    value= "<% if (typeof valores != 'undefined') { %><%= valores.telefono %><% } %>%> ">
+                    value= "<% if (typeof valores != 'undefined') { %><%= valores.telefono %><% } %>">
                 </div>
                 <div class=" mb-3">
                     <label for="celular1" class="form-label">Celular</label>
                     <input id="celular1" name="celular" type="text" class="form-control" placeholder="Ingresar Celular"
-                    value= "<% if (typeof valores != 'undefined') { %><%= valores.celular %><% } %>%> ">
+                    value= "<% if (typeof valores != 'undefined') { %><%= valores.celular %><% } %>">
                 </div>
                 <div class=" mb-3">
                     <label for="email1" class="form-label">Correo</label>
                     <input id="email1" name="email" type="text" class="form-control" placeholder="Ingresar Correo"
-                    value= "<% if (typeof valores != 'undefined') { %><%= valores.email %><% } %>%> ">
+                    value= "<% if (typeof valores != 'undefined') { %><%= valores.email %><% } %>">
                 </div>
                 <div class=" mb-3">
                     <label for="empresa1" class="form-label">Empresa</label>
                     <input id="empresa1" name="empresa" type="text" class="form-control" placeholder="Ingresar Empresa"
-                    value= "<% if (typeof valores != 'undefined') { %><%= valores.empresa %><% } %>%> ">
+                    value= "<% if (typeof valores != 'undefined') { %><%= valores.empresa %><% } %>">
                 </div>
                 <div class="mb-3">
                     <label for="observacion1" class="form-label">Observación</label>
-                    <textarea id="observacion1" name="observacion" class="form-control" placeholder="Una breve descripción, 550 palabras..."></textarea>
+                    <textarea id="observacion1" name="observacion" class="form-control" 
+                    placeholder="Una breve descripción, 550 palabras..."><% if (typeof valores != 'undefined') { %><%= valores.observacion %><% }%></textarea>
                 </div>
                 <div class="mb-3 form-check">
                     <input type="checkbox" class="form-check-label">

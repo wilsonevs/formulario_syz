@@ -8,7 +8,7 @@ const getIndex = (req, res) => {
 
 const index_Post = async (req, res) => {
   const { firstname, lastname, telefono, celular, email, empresa, observacion } = req.body;
-  const datos="INSERT INTO contactanos (firstname, lastname, telefono, celular, email, empresa, observacion) VALUES ($1, $2, $3, $4, $5, $6, $7)";
+  const datos=("INSERT INTO contactanos (firstname, lastname, telefono, celular, email, empresa, observacion) VALUES ($1, $2, $3, $4, $5, $6, $7)");
   const values= [firstname, lastname, telefono, celular, email, empresa, observacion ];
   console.log(req.body);
   try {
@@ -36,37 +36,13 @@ const index_Post = async (req, res) => {
   }
 };
 
-const getW = async (req, res) =>{
-  try {
-    const querys= "SELECT * FROM nombres";
-    pool.query(querys, results =>{
-      res.render("prueba.ejs", {
-        datos: results,
-      })
-    })
 
-  } catch (error) {
-    console.log("El ERROR ES: "+error);
-    
-    // return res.status(500).json('Internal server error');
-  }
-
-}
-
-
-const index_Validacion_post = (req, res) => {
-  // const errors = validationResult(req);
-  // if (!errors.isEmpty()) {
-  //   res.status(400).json({ errors: errors.array() });
-  //   console.log(errors)
-  // };
-
-   const errors = validationResult(req);
-   if(!errors.isEmpty()){
-     console.log(req.body);
-     const validacionesErrores = errors.array();
-     const valores = req.body;
-     res.render("index.ejs", {
+const index_Validacion_post = async (req, res) => {
+  const errors = validationResult(req);
+  if(!errors.isEmpty()){
+    const validacionesErrores = errors.array();
+    const valores = req.body;
+    res.render("index.ejs", {
       validacionesErrores: validacionesErrores,
       valores: valores,
       alertPosition: 'bottom',
@@ -75,29 +51,38 @@ const index_Validacion_post = (req, res) => {
       showConfirmButton: true,
       timer: 2500,
       ruta: "/",
-      });
-   }else{
-    res.render("index.ejs", {
-      alert: true,
-      alertPosition: 'center',
-      alertIcon: "success",
-      alertTitle: "Enviado",
-      showConfirmButton: false,
-      timer: false,
-      ruta: "/",
     });
-   }
+  }else{
+    const { firstname, lastname, telefono, celular, email, empresa, observacion } = req.body;
+    const datos=("INSERT INTO contactanos (firstname, lastname, telefono, celular, email, empresa, observacion) VALUES ($1, $2, $3, $4, $5, $6, $7)");
+    const values= [firstname, lastname, telefono, celular, email, empresa, observacion ];
+
+    const responde= await pool.query(datos,values, ( error, results) => {
+      if (error) {
+        console.log("Que error tengo: " + error);
+      } else {
+        res.render("index.ejs", {
+          alert: true,
+          alertPosition: 'center',
+          alertTitle: "Enviado",
+          alertIcon: "success",
+          alertText: "Exitosamente",
+          showConfirmButton: true,
+          timer: 2500,
+          ruta: "/",
+        });
+      }
+    });
+    console.log(responde);
+  }
+
+
   
 };
-
-
-
-
 
 
 module.exports = {
   getIndex, 
   index_Post, 
   index_Validacion_post,
-  getW,
 }
